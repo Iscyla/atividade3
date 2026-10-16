@@ -7,8 +7,13 @@ let produtos = [
   { nome: "Sorvete", preco: 10.0, categoria: "Doce" },
   { nome: "Suco", preco: 17.0, categoria: "Bebida" },
 ];
+
 console.log(produtos);
 
-var cadastrarPedido = (prompt("Deseja qual produto?"))
+var cadastrarPedido = prompt("Deseja qual produto?");
+var qtdPedido = prompt("Quantos desej?")
 
-console.log(produtos.includes("cadastrarPedido"));
+console.log(
+  produtos.map(produto => produto.nome).includes(cadastrarPedido)
+);
+
