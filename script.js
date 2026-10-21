@@ -1,5 +1,3 @@
-console.log("Nossos pratos:");
-
 let produtos = [
   { nome: "Torta", preco: 20.0, categoria: "Doce" },
   { nome: "Refrigerante", preco: 10.0, categoria: "Bebida" },
@@ -8,12 +6,42 @@ let produtos = [
   { nome: "Suco", preco: 17.0, categoria: "Bebida" },
 ];
 
-console.log(produtos);
+let pedidos = [];
 
-var cadastrarPedido = prompt("Deseja qual produto?");
-var qtdPedido = prompt("Quantos desej?")
+function listarMenu(callback) {
+  for (let i = 0; i < produtos.length; i++) {
+    console.log(produtos[i].nome + " - R$ " + produtos[i].preco);
+  }
+  callback();
+}
 
-console.log(
-  produtos.map(produto => produto.nome).includes(cadastrarPedido)
-);
+function cadastrarPedido(nome, quantidade, callback) {
+    let produto = produtos.find(p => p.nome === nome);
 
+  if (produto) {
+    pedidos.push({
+      produto: produto.nome,
+      quantidade: quantidade,
+      precoUnitario: produto.preco,
+      valorTotal: produto.preco * quantidade,
+    });
+
+    console.log("Pedido cadastrado!");
+    callback();
+  } else {
+    console.log("Produto não encontrado!");
+  }
+}
+
+function listarPedidos() {
+  for (let i = 0; i < pedidos.length; i++) {
+    console.log(pedidos[i]);
+  }
+}
+
+listarMenu(function () {
+  let nome = prompt("Digite o nome do produto:");
+  let quantidade = Number(prompt("Digite a quantidade:"));
+
+  cadastrarPedido(nome, quantidade, listarPedidos);
+});
